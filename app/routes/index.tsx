@@ -5,7 +5,7 @@ import { H2, H4 } from "#app/components/typography.tsx";
 import { Button } from "#app/components/ui/button.tsx";
 import { Link, Outlet, useRouteError } from "@remix-run/react";
 import { Mic } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 function MaybeOutlet({ open }: { open: boolean }) {
@@ -68,28 +68,41 @@ function Record({
 export default function Index() {
   const [responseAudio, setResponseAudio] = React.useState<Blob | null>(null);
   const [audio, setAudio] = React.useState<Blob | null>(null);
+  const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   return (
-    <div className="container text-center align-middle w-1/3 my-10">
-      {/* <div className="relative">
-        <Input placeholder="Use your voices" />
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-          <Mic />
+    <div className="container text-center align-middle my-10 w-[50%]">
+      {openVoiceCtrl && (
+        <Grid
+          as="main"
+          className="w-[80%] border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto"
+        >
+          <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1">
+            <Record slug="./" active={true} title="Make a new recording" />
+            <CallRecorder
+              onRecordingComplete={(recording) => setAudio(recording)}
+              team={"blue"}
+            />
+          </div>
+        </Grid>
+      )}
+
+      <div className="relative">
+        <label htmlFor="micInputId" className="float-left mx-3">Use your voice</label>
+        <Input
+          placeholder="Click on mic icon"
+          className="w-full p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 h-20"
+          id="micInputId"
+          disabled
+        />
+        <div
+          className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer mt-5"
+          onClick={() => {
+            setOpenVoiceCtrl(!openVoiceCtrl);
+          }}
+        >
+          <Mic className="cursor-pointer" />
         </div>
-      </div> */}
-      <Grid as="header" className="mb-12">
-        <H2 className="col-span-full lg:col-span-8 lg:col-start-3">
-          {`Record your voice`}
-        </H2>
-      </Grid>
-      <Grid as="main">
-        <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1">
-          <Record slug="./" active={true} title="Make a new recording" />
-          <CallRecorder
-            onRecordingComplete={(recording) => setAudio(recording)}
-            team={"blue"}
-          />
-        </div>
-      </Grid>
+      </div>
     </div>
   );
 }
