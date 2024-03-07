@@ -8,21 +8,7 @@ import { Tag } from "../tags.tsx";
 import { assertNonNull } from "#app/utils/misc.tsx";
 import { Paragraph } from "../typography.tsx";
 import { Mic, Pause, Square, Triangle } from "lucide-react";
-// import { type OptionalTeam } from "~/types.ts";
-// import { assertNonNull, getOptionalTeam } from "~/utils/misc.tsx";
-// import { Button, LinkButton } from "../button.tsx";
-// import { useInterval } from "../hooks/use-interval.tsx";
-// import {
-//   MicrophoneIcon,
-//   PauseIcon,
-//   SquareIcon,
-//   TriangleIcon,
-// } from "../icons.tsx";
-// import { Tag } from "../tag.tsx";
-// import { Paragraph } from "../typography.tsx";
 
-// Play around with these values to affect the audio visualisation.
-// Should be able to stream the visualisation back no problem.
 
 type Team = "RED" | "BLUE" | "YELLOW";
 type OptionalTeam = Team | "UNKNOWN";

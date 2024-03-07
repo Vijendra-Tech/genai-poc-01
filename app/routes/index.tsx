@@ -71,23 +71,27 @@ export default function Index() {
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   return (
     <div className="container text-center align-middle my-10 w-[50%]">
-      {openVoiceCtrl && (
-        <Grid
-          as="main"
-          className="w-[80%] border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto"
-        >
-          <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1">
-            <Record slug="./" active={true} title="Make a new recording" />
-            <CallRecorder
-              onRecordingComplete={(recording) => setAudio(recording)}
-              team={"blue"}
-            />
-          </div>
-        </Grid>
-      )}
+      <div className="min-h-[70vh] max-h-[70vh]">
+        {openVoiceCtrl && (
+          <Grid
+            as="main"
+            className="w-[80%] border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto"
+          >
+            <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1">
+              <Record slug="./" active={true} title="Make a new recording" />
+              <CallRecorder
+                onRecordingComplete={(recording) => setAudio(recording)}
+                team={"blue"}
+              />
+            </div>
+          </Grid>
+        )}
+      </div>
 
       <div className="relative">
-        <label htmlFor="micInputId" className="float-left mx-3">Use your voice</label>
+        <label htmlFor="micInputId" className="float-left mx-3">
+          Use your voice
+        </label>
         <Input
           placeholder="Click on mic icon"
           className="w-full p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 h-20"
