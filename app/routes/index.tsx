@@ -100,7 +100,7 @@ export default function Index() {
             setOpenVoiceCtrl(!openVoiceCtrl);
           }}
         >
-          <Mic className="cursor-pointer" />
+          <Mic className="cursor-pointer text-orange-400" />
         </div>
       </div>
     </div>

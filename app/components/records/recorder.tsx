@@ -301,9 +301,9 @@ function CallRecorder({
       `The state machine is in "stopped" state but there's no audioBlob. This should be impossible.`
     );
     audioPreview = (
-      <div>
+      <div className="w-full">
         <div className="mb-4">
-          <audio src={audioURL} controls ref={playbackRef} preload="metadata" />
+          <audio src={audioURL} controls ref={playbackRef} preload="metadata" className="w-full"/>
         </div>
         <StreamVis
           metadata={metadataRef}
@@ -312,7 +312,7 @@ function CallRecorder({
           playbackRef={playbackRef}
           team={team}
         />
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 justify-center">
           <Button  onClick={() => onRecordingComplete(audioBlob)}>
             Accept
           </Button>
@@ -331,7 +331,7 @@ function CallRecorder({
     <div>
       <div>
         {state.matches("ready") ? (
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-12 flex-wrap">
             <Paragraph>
               <span id="device-label">{`Current recording device: `}</span>
               <LinkButton
@@ -340,7 +340,7 @@ function CallRecorder({
                 style={{ maxWidth: "80vw" }}
                 aria-labelledby="device-label"
               >
-                {state.context.selectedAudioDevice?.label ?? "default"}
+                <p className="text-wrap">{state.context.selectedAudioDevice?.label ?? "default"}</p>
               </LinkButton>
             </Paragraph>
             <Button
