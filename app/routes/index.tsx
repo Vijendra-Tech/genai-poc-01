@@ -59,7 +59,7 @@ function Record({
         <span className="relative">{title}</span>
       </Link>
       <div className="col-span-full">
-        <MaybeOutlet open={active} />
+        <MaybeOutlet open={true} />
       </div>
     </Grid>
   );
@@ -82,7 +82,7 @@ export default function Index() {
         </H2>
       </Grid>
       <Grid as="main">
-        <div className="col-span-full lg:col-span-8 lg:col-start-3">
+        <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1">
           <Record slug="./" active={true} title="Make a new recording" />
           <CallRecorder
             onRecordingComplete={(recording) => setAudio(recording)}

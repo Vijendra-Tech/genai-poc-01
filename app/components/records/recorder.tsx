@@ -343,9 +343,14 @@ function CallRecorder({
                 {state.context.selectedAudioDevice?.label ?? "default"}
               </LinkButton>
             </Paragraph>
-            <Button  onClick={() => send({ type: "start" })}>
-              <Mic size={'lg'} />
-              <span>Start recording</span>
+            <Button
+              onClick={() => send({ type: "start" })}
+              className="bg-primary text-primary-foreground shadow hover:bg-primary/90 rounded-full h-14"
+            >
+              <div className="flex flex-row justify-between">
+                <Mic />
+                <p>Start recording</p>
+              </div>
             </Button>
           </div>
         ) : null}
@@ -367,22 +372,19 @@ function CallRecorder({
 
       {state.matches("recording.playing") ? (
         <div className="flex flex-wrap gap-4">
-          <Button  onClick={() => send({ type: "stop" })}>
+          <Button onClick={() => send({ type: "stop" })}>
             <Square /> <span>Stop</span>
           </Button>
-          <Button
-            variant="secondary"
-            onClick={() => send({ type: "pause" })}
-          >
+          <Button variant="secondary" onClick={() => send({ type: "pause" })}>
             <Pause /> <span>Pause</span>
           </Button>
         </div>
       ) : state.matches("recording.paused") ? (
         <div className="flex flex-wrap gap-4">
-          <Button  onClick={() => send({ type: "stop" })}>
+          <Button onClick={() => send({ type: "stop" })}>
             <Square /> <span>Stop</span>
           </Button>
-          <Button  onClick={() => send({ type: "resume" })}>
+          <Button onClick={() => send({ type: "resume" })}>
             <Triangle /> <span>Resume</span>
           </Button>
         </div>
