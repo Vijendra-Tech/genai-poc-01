@@ -371,7 +371,7 @@ function CallRecorder({
       ) : null}
 
       {state.matches("recording.playing") ? (
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 justify-center">
           <Button onClick={() => send({ type: "stop" })}>
             <Square /> <span>Stop</span>
           </Button>
@@ -380,7 +380,7 @@ function CallRecorder({
           </Button>
         </div>
       ) : state.matches("recording.paused") ? (
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 justify-center">
           <Button onClick={() => send({ type: "stop" })}>
             <Square /> <span>Stop</span>
           </Button>
