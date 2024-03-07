@@ -70,41 +70,49 @@ export default function Index() {
   const [audio, setAudio] = React.useState<Blob | null>(null);
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   return (
-    <div className="container text-center align-middle my-10 w-[50%]">
-      <div className="min-h-[70vh] max-h-[70vh]">
-        {openVoiceCtrl && (
-          <Grid
-            as="main"
-            className="w-[80%] border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto"
-          >
-            <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1">
-              <Record slug="./" active={true} title="Make a new recording" />
-              <CallRecorder
-                onRecordingComplete={(recording) => setAudio(recording)}
-                team={"blue"}
-              />
-            </div>
-          </Grid>
-        )}
-      </div>
-
-      <div className="relative">
-        <label htmlFor="micInputId" className="float-left mx-3">
-          Use your voice
-        </label>
-        <Input
-          placeholder="Click on mic icon"
-          className="w-full p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 h-20"
-          id="micInputId"
-          disabled
-        />
-        <div
-          className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer mt-5"
-          onClick={() => {
-            setOpenVoiceCtrl(!openVoiceCtrl);
-          }}
+    <div className="container text-center align-middle my-10 md:w-[50%] w-full">
+      {/* <div className="min-h-[70vh] max-h-[70vh]"> */}
+      {openVoiceCtrl && (
+        <Grid
+          as="main"
+          className="w-full md:w-[60%]  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto max-h-[550px]"
         >
-          <Mic className="cursor-pointer text-orange-400" />
+        {/* <Grid
+          as="main"
+          className="w-[60%] border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto max-h-[550px]"
+        > */}
+          <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1">
+            <Record slug="./" active={true} title="Make a new recording" />
+            <CallRecorder
+              onRecordingComplete={(recording) => setAudio(recording)}
+              team={"blue"}
+            />
+          </div>
+        </Grid>
+      )}
+      <div className="fixed bottom-10 bg-white dark:bg-gray-800 text-center py-2 md:w-[45%] w-[80%] mx-auto">
+        <div className="relative">
+          <label
+            htmlFor="micInputId"
+            className="float-left mx-3 text-lg font-medium text-gray-700"
+          >
+            <H4>Ask me</H4>
+          </label>
+
+          <Input
+            placeholder="Click on mic icon"
+            className="w-full p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 h-20"
+            id="micInputId"
+            disabled
+          />
+          <div
+            className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer mt-5"
+            onClick={() => {
+              setOpenVoiceCtrl(!openVoiceCtrl);
+            }}
+          >
+            <Mic className="cursor-pointer text-orange-400" />
+          </div>
         </div>
       </div>
     </div>
