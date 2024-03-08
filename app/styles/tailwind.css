@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  width: 5px; /* Adjust as needed */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); /* Adjust as needed */
+}
+
 @layer base {
 	:root {
 		--font-sans: Nunito Sans, Nunito Sans Fallback;

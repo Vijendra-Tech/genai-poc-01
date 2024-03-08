@@ -72,7 +72,8 @@ export default function Index() {
   return (
     <div className="container text-center align-middle my-10 md:w-[50%] w-full">
       {openVoiceCtrl && (
-        <div style={{ overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: 'var(--scrollbar-thumb) var(--scrollbar-track)' }}>
+        <div style={{ overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: 'var(--scrollbar-thumb) var(--scrollbar-track)', aspectRatio: '3/2' }}>
+      
         <Grid
           as="main"
           className="w-full md:w-full lg:w-full  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto md:overflow-y-auto lg:overflow-y-auto max-h-[50vh] md:max-h-[50vh] lg:max-h-[50vh]"
