@@ -71,16 +71,11 @@ export default function Index() {
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   return (
     <div className="container text-center align-middle my-10 md:w-[50%] w-full">
-      {/* <div className="min-h-[70vh] max-h-[70vh]"> */}
       {openVoiceCtrl && (
         <Grid
           as="main"
-          className="w-full md:w-[60%]  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto md:overflow-y-auto lg:overflow-y-auto max-h-[50vh] md:max-h-[50vh] lg:max-h-[50vh]"
+          className="w-full md:w-full lg:w-full  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto md:overflow-y-auto lg:overflow-y-auto max-h-[50vh] md:max-h-[50vh] lg:max-h-[50vh]"
         >
-          {/* <Grid
-          as="main"
-          className="w-[60%] border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto max-h-[550px]"
-        > */}
           <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1">
             <Record slug="./" active={true} title="Make a new recording" />
             <CallRecorder
