@@ -75,9 +75,9 @@ export default function Index() {
       {openVoiceCtrl && (
         <Grid
           as="main"
-          className="w-full md:w-[60%]  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto max-h-[550px]"
+          className="w-full md:w-[60%]  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto md:overflow-y-auto lg:overflow-y-auto max-h-[550px] md:max-h-[550px] lg:max-h-[550px]"
         >
-        {/* <Grid
+          {/* <Grid
           as="main"
           className="w-[60%] border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto max-h-[550px]"
         > */}
