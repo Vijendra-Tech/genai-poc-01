@@ -84,3 +84,40 @@ export function assertNonNull<PossibleNullType>(
 ): asserts possibleNull is Exclude<PossibleNullType, null | undefined> {
   if (possibleNull == null) throw new Error(errorMessage);
 }
+
+export function getDomainUrl(request: Request) {
+  const host =
+    request.headers.get("X-Forwarded-Host") ?? request.headers.get("host");
+  if (!host) {
+    throw new Error("Could not determine domain URL.");
+  }
+  const protocol = host.includes("localhost") ? "http" : "https";
+  return `${protocol}://${host}`;
+}
+export function getNonNull<
+  Type extends Record<string, null | undefined | unknown>,
+>(obj: Type): NonNullProperties<Type> {
+  for (const [key, val] of Object.entries(obj)) {
+    assertNonNull(val, `The value of ${key} is null but it should not be.`);
+  }
+  return obj as NonNullProperties<Type>;
+}
+
+export function getErrorForLanguage(title: string | null) {
+  if (!title) return `Title is required`;
+
+  const minLength = 1;
+  const maxLength = 80;
+  if (title.length < minLength) {
+    return `Title must be at least ${minLength} characters`;
+  }
+  if (title.length > maxLength) {
+    return `Title must be no longer than ${maxLength} characters`;
+  }
+  return null;
+}
+
+export function getErrorForAudio(audio: string | null) {
+  if (!audio) return "Audio file is required";
+  return null;
+}

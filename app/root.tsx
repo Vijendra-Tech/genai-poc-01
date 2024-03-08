@@ -18,14 +18,16 @@ import { KCDShop } from './kcdshop.tsx'
 import fontStylestylesheetUrl from './styles/font.css'
 import tailwindStylesheetUrl from './styles/tailwind.css'
 import { getEnv } from './utils/env.server.ts'
+import globalCss from './globals.css'
 
 export const links: LinksFunction = () => {
 	return [
-		{ rel: 'icon', type: 'image/svg+xml', href: "" },
-		{ rel: 'stylesheet', href: fontStylestylesheetUrl },
-		{ rel: 'stylesheet', href: tailwindStylesheetUrl },
-		cssBundleHref ? { rel: 'stylesheet', href: cssBundleHref } : null,
-	].filter(Boolean)
+    { rel: "icon", type: "image/svg+xml", href: "" },
+    { rel: "stylesheet", href: fontStylestylesheetUrl },
+    { rel: "stylesheet", href: tailwindStylesheetUrl },
+    // { rel: "stylesheet", href: globalCss },
+    cssBundleHref ? { rel: "stylesheet", href: cssBundleHref } : null,
+  ].filter(Boolean);
 }
 
 export async function loader() {

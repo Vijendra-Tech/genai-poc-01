@@ -664,7 +664,7 @@ function StreamVis({
   metadata: React.MutableRefObject<Array<number>>;
   team: string;
 }) {
-const colors: [string, string, string] = ["blue", "green", "red"];
+const colors: [string, string, string] = ["orange", "orange", "orange"];
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
   const nodesRef = React.useRef<
     Array<{
