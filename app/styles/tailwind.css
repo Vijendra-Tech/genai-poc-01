@@ -3,7 +3,12 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-  width: 5px; /* Adjust as needed */
+  width: 2px; /* Adjust as needed */
+}
+
+/* For WebKit (Chrome, Safari, etc.) */
+::-webkit-scrollbar:hover {
+  width: 4px; /* Adjust as needed */
 }
 
 /* For Firefox */
