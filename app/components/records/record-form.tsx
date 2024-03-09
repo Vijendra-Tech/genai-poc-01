@@ -75,7 +75,7 @@ function AudioSubmitForm({
             {data.errors.generalError}
           </p>
         ) : null}
-        {audioURL ? (
+        {/* {audioURL ? (
           <div className="flex justify-center">
             <audio
               src={audioURL}
@@ -86,7 +86,7 @@ function AudioSubmitForm({
           </div>
         ) : (
           "loading..."
-        )}
+        )} */}
         {data?.errors.audio ? (
           <p id="audio-error-message" className="text-red-600 text-center">
             {data.errors.audio}
@@ -94,8 +94,20 @@ function AudioSubmitForm({
         ) : null}
       </div>
       <Form onSubmit={handleSubmit}>
-        <div className="flex justify-center">
-           <input type="hidden" name="audioUrl" value={audioURL}/>
+        <div className="flex justify-between flex-row gap-2">
+          <input type="hidden" name="audioUrl" value={audioURL} />
+          {audioURL ? (
+            <div className="">
+              <audio
+                src={audioURL}
+                controls
+                preload="metadata"
+                aria-describedby="audio-error-message"
+              />
+            </div>
+          ) : (
+            "loading..."
+          )}
           <Select name="language">
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select a Language" />
@@ -111,7 +123,7 @@ function AudioSubmitForm({
             </SelectContent>
           </Select>
         </div>
-        <Button type="submit" className="my-10 float-end">
+        <Button type="submit" className="float-end">
           Submit Query
         </Button>
       </Form>

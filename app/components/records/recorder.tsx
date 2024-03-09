@@ -319,14 +319,14 @@ function CallRecorder({
         {state.matches("ready") ? (
           <div className="flex flex-col gap-12 flex-wrap">
             <Paragraph>
-              <span id="device-label">{`Current recording device: `}</span>
+              <span id="device-label" className="text-xs text-wrap text-black">{`Current recording device: `}</span>
               <LinkButton
                 onClick={() => send({ type: "changeDevice" })}
                 className="truncate"
                 style={{ maxWidth: "80vw" }}
                 aria-labelledby="device-label"
               >
-                <p className="text-wrap">{state.context.selectedAudioDevice?.label ?? "default"}</p>
+                <p className="text-wrap text-xs">{state.context.selectedAudioDevice?.label ?? "default"}</p>
               </LinkButton>
             </Paragraph>
             <Button

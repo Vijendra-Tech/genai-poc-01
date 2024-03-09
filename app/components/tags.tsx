@@ -27,7 +27,7 @@ function Tag({ tag, selected, onClick, disabled }: TagProps) {
       disabled={disabled}
     >
       <CustomCheckboxInput checked={selected} value={tag} className="sr-only" />
-      <span>{tag}</span>
+      <span className="text-xs">{tag}</span>
     </CustomCheckboxContainer>
   );
 }

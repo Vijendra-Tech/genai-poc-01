@@ -23,8 +23,8 @@ function ChatWindow({ setOpenChatWindow }: any) {
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   const actionData = useActionData<ActionData>();
   return (
-    <div className="flex flex-col items-center justify-center w-screen min-h-[50rem] md:min-h-[50rem] lg:min-h-[50rem] text-gray-800 p-10">
-      <div className="bg-orange-400 w-[36rem] h-20 px-10 flex justify-start items-center">
+    <div className="flex flex-col items-center justify-center w-screen min-h-[50rem] md:min-h-[30rem] lg:min-h-[50rem] text-gray-800 p-10">
+      <div className="bg-orange-400 w-[36rem] md:w-[36rem] lg:w-[36rem] h-20 px-10 flex justify-start items-center">
         <Bot size={"40px"} className="mx-5" />
         <h1 className="text-2xl font-bold grow">HCBC Boat</h1>
         <MessageSquareX
@@ -74,13 +74,15 @@ function ChatWindow({ setOpenChatWindow }: any) {
             <WrappedAnimation open={true}>
               <Grid
                 as="main"
-                className="w-full md:w-full lg:w-full  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto md:overflow-y-auto lg:overflow-y-auto max-h-[50vh] md:max-h-[50vh] lg:max-h-[50vh]"
+                className="w-full inset-x-0 mt-32 md:w-full lg:w-full  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto md:overflow-y-auto lg:overflow-y-auto max-h-[20vh] md:max-h-[20vh] lg:max-h-[20vh]"
               >
-                <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1">
+                <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1 align-top">
                   {audio ? (
-                    <AudioSubmitForm audio={audio} data={actionData} />
+                    <div className="mt-0">
+                      <AudioSubmitForm audio={audio} data={actionData} />
+                    </div>
                   ) : (
-                    <div className="">
+                    <div className="top-0">
                       <CallRecorder
                         onRecordingComplete={(recording) => setAudio(recording)}
                         team={"blue"}
