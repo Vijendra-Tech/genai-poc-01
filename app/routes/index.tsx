@@ -21,6 +21,7 @@ import {
 } from "#app/utils/misc.tsx";
 import { audioTotext } from "#app/utils/llms.server.ts";
 import LLMAPIResponseUI from "#app/components/response-ui.tsx";
+import ChatWindow from "#app/components/chat-window.tsx";
 
 type ActionData = RecordingFormData;
 
@@ -159,31 +160,9 @@ export default function Index() {
           </Grid>
         </div>
       )}
-      <div className="fixed bottom-10 bg-white dark:bg-gray-800 text-center py-2 md:w-[45%] w-[80%] mx-auto">
-        <div className="relative">
-          <label
-            htmlFor="micInputId"
-            className="float-left mx-3 text-lg font-medium text-gray-700"
-          >
-            <H4>Ask me</H4>
-          </label>
-          <LLMAPIResponseUI msg={actionData ? actionData.msg : "hello"} />
-          <Input
-            placeholder="Click on mic icon"
-            className="w-full p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 h-20"
-            id="micInputId"
-            disabled
-          />
-          <div
-            className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer mt-5"
-            onClick={() => {
-              setOpenVoiceCtrl(!openVoiceCtrl);
-            }}
-          >
-            <Mic className="cursor-pointer text-orange-400" />
-          </div>
-        </div>
-      </div>
+     
+      {/* <LLMAPIResponseUI msg={actionData ? actionData.msg : "hello"} /> */}
+      <ChatWindow />
     </div>
   );
 }
