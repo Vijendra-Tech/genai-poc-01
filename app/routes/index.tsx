@@ -4,7 +4,15 @@ import { CallRecorder } from "#app/components/records/recorder.tsx";
 import { H2, H4 } from "#app/components/typography.tsx";
 import { Button } from "#app/components/ui/button.tsx";
 import { Link, Outlet, useActionData, useRouteError } from "@remix-run/react";
-import { Mic } from "lucide-react";
+import {
+  BotIcon,
+  LucideVoicemail,
+  MessageCircleCodeIcon,
+  Mic,
+  MicIcon,
+  Voicemail,
+  VoicemailIcon,
+} from "lucide-react";
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -125,44 +133,21 @@ export default function Index() {
   const [audio, setAudio] = React.useState<Blob | null>(null);
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   const actionData = useActionData<ActionData>();
+  const [openChatWindow, setOpenChatWindow] = useState(false);
   return (
     <div className="container text-center align-middle my-10 md:w-[50%] w-full">
-      {openVoiceCtrl && (
+      {openChatWindow && <ChatWindow setOpenChatWindow={setOpenChatWindow} />}
+      {!openChatWindow && (
         <div
-          style={{
-            overflowY: "auto",
-            scrollbarWidth: "thin",
-            scrollbarColor: "var(--scrollbar-thumb) var(--scrollbar-track)",
-            aspectRatio: "3/2",
-          }}
+          className="fixed bottom-10 right-10 z-50"
+          onClick={() => setOpenVoiceCtrl(!openVoiceCtrl)}
         >
-          <Grid
-            as="main"
-            className="w-full md:w-full lg:w-full  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto md:overflow-y-auto lg:overflow-y-auto max-h-[50vh] md:max-h-[50vh] lg:max-h-[50vh]"
-          >
-            <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1">
-              {audio ? (
-                <AudioSubmitForm audio={audio} data={actionData} />
-              ) : (
-                <>
-                  <Record
-                    slug="./"
-                    active={true}
-                    title="Make a new recording"
-                  />
-                  <CallRecorder
-                    onRecordingComplete={(recording) => setAudio(recording)}
-                    team={"blue"}
-                  />
-                </>
-              )}
-            </div>
-          </Grid>
+          <MessageCircleCodeIcon
+            size={"90px"}
+            onClick={() => setOpenChatWindow(!openChatWindow)}
+          />
         </div>
       )}
-     
-      {/* <LLMAPIResponseUI msg={actionData ? actionData.msg : "hello"} /> */}
-      <ChatWindow />
     </div>
   );
 }
