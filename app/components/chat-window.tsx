@@ -23,8 +23,8 @@ function ChatWindow({ setOpenChatWindow }: any) {
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   const actionData = useActionData<ActionData>();
   return (
-    <div className="flex flex-col items-center justify-center w-screen text-gray-800 z-10 min-w-[30rem] min-h-[50rem]">
-      <div className="bg-orange-400 w-[30rem] md:w-[30rem] lg:w-[30rem] h-20 px-10 flex justify-start items-center">
+    <div className="flex flex-col items-center justify-center w-screen text-gray-800 z-10 min-w-[30rem] min-h-[50rem] fixed bottom-10 -right-1/4 lg:-right-1/5 md:-right-1/5 ">
+      <div className="bg-orange-400 w-[36rem] md:w-[36rem] lg:w-[36rem] h-20 px-10 flex justify-start items-center">
         <Bot size={"40px"} className="mx-5" />
         <h1 className="text-2xl font-bold grow">HCBC Bot</h1>
         <MessageSquareX
@@ -62,7 +62,7 @@ function ChatWindow({ setOpenChatWindow }: any) {
             <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
           </div>
         </div>
-       
+
         <div className="p-4 flex flex-col justify-end">
           {openVoiceCtrl && (
             <div
