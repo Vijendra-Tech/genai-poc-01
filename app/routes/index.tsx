@@ -31,6 +31,7 @@ import { audioTotext } from "#app/utils/llms.server.ts";
 import LLMAPIResponseUI from "#app/components/response-ui.tsx";
 import ChatWindow from "#app/components/chat-window.tsx";
 import AssistentImage from "#app/components/assistent-image.tsx";
+import AiDesc from "#app/components/ai-desc.tsx";
 
 type ActionData = RecordingFormData;
 
@@ -134,10 +135,12 @@ export default function Index() {
   const [audio, setAudio] = React.useState<Blob | null>(null);
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   const actionData = useActionData<ActionData>();
-  const [openChatWindow, setOpenChatWindow] = useState(false);
+  const [openChatWindow, setOpenChatWindow] = useState(true);
   return (
-    <div className="container my-10 md:w-[50%] w-full flex flex-row gap-10">
-        <AssistentImage />
+    <div className="container  w-full flex flex-row gap-10">
+      <AssistentImage />
+      <AiDesc />
+      <div></div>
       {openChatWindow && <ChatWindow setOpenChatWindow={setOpenChatWindow} />}
       {!openChatWindow && (
         <div

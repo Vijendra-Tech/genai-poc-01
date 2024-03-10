@@ -23,7 +23,7 @@ function ChatWindow({ setOpenChatWindow }: any) {
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   const actionData = useActionData<ActionData>();
   return (
-    <div className="flex flex-col items-center justify-center w-screen min-h-[45rem] md:min-h-[45rem] lg:min-h-[45rem] text-gray-800 p-10">
+    <div className="flex flex-col items-center justify-center w-screen min-h-[45rem] md:min-h-[45rem] lg:min-h-[45rem] text-gray-800  pr-30 z-10">
       <div className="bg-orange-400 w-[36rem] md:w-[36rem] lg:w-[36rem] h-20 px-10 flex justify-start items-center">
         <Bot size={"40px"} className="mx-5" />
         <h1 className="text-2xl font-bold grow">HCBC Bot</h1>
