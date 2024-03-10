@@ -135,12 +135,11 @@ export default function Index() {
   const [audio, setAudio] = React.useState<Blob | null>(null);
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   const actionData = useActionData<ActionData>();
-  const [openChatWindow, setOpenChatWindow] = useState(true);
+  const [openChatWindow, setOpenChatWindow] = useState(false);
   return (
-    <div className="container  w-full flex flex-row gap-10">
+    <div className="container w-full flex flex-row gap-0">
       <AssistentImage />
       <AiDesc />
-      <div></div>
       {openChatWindow && <ChatWindow setOpenChatWindow={setOpenChatWindow} />}
       {!openChatWindow && (
         <div

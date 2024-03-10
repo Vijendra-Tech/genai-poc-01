@@ -3,7 +3,7 @@ import React from "react";
 function AiDesc() {
   return (
     <div className="flex flex-row relativen ">
-      <div className="absolute min-w-[40rem] mt-44">
+      <div className="absolute mt-44 px-5 max-h-[400px] overflow-auto">
         <div className="text-2xl font-bold">
           ASK YOUR BANKING RELATED QUESTIONS - GENERATIVE AI POWERED CONTACT
           CENTER AI VOICEBOT
