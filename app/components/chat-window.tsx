@@ -23,8 +23,8 @@ function ChatWindow({ setOpenChatWindow }: any) {
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   const actionData = useActionData<ActionData>();
   return (
-    <div className="flex flex-col items-center justify-center w-screen min-h-[45rem] md:min-h-[45rem] lg:min-h-[45rem] text-gray-800  pr-30 z-10">
-      <div className="bg-orange-400 w-[36rem] md:w-[36rem] lg:w-[36rem] h-20 px-10 flex justify-start items-center">
+    <div className="flex flex-col items-center justify-center w-screen text-gray-800 z-10 min-w-[30rem] min-h-[50rem]">
+      <div className="bg-orange-400 w-[30rem] md:w-[30rem] lg:w-[30rem] h-20 px-10 flex justify-start items-center">
         <Bot size={"40px"} className="mx-5" />
         <h1 className="text-2xl font-bold grow">HCBC Bot</h1>
         <MessageSquareX
@@ -76,7 +76,7 @@ function ChatWindow({ setOpenChatWindow }: any) {
               <WrappedAnimation open={true}>
                 <Grid
                   as="main"
-                  className="w-full inset-x-0 md:w-full lg:w-full  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto md:overflow-y-auto lg:overflow-y-auto max-h-[30vh] md:max-h-[30vh] lg:max-h-[30vh]"
+                  className="w-full inset-x-0 md:w-full lg:w-full border bg-muted rounded-md shadow-md  overflow-y-auto md:overflow-y-auto lg:overflow-y-auto min-h-[200px] max-h-[200px]"
                 >
                   <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1 align-top">
                     {audio ? (
