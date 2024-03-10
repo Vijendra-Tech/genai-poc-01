@@ -62,52 +62,55 @@ function ChatWindow({ setOpenChatWindow }: any) {
             <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
           </div>
         </div>
-        {openVoiceCtrl && (
-          <div
-            style={{
-              overflowY: "auto",
-              scrollbarWidth: "thin",
-              scrollbarColor: "var(--scrollbar-thumb) var(--scrollbar-track)",
-              aspectRatio: "3/2",
-            }}
-          >
-            <WrappedAnimation open={true}>
-              <Grid
-                as="main"
-                className="w-full inset-x-0 mt-32 md:w-full lg:w-full  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto md:overflow-y-auto lg:overflow-y-auto max-h-[20vh] md:max-h-[20vh] lg:max-h-[20vh]"
-              >
-                <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1 align-top">
-                  {audio ? (
-                    <div className="mt-0">
-                      <AudioSubmitForm audio={audio} data={actionData} />
-                    </div>
-                  ) : (
-                    <div className="top-0">
-                      <CallRecorder
-                        onRecordingComplete={(recording) => setAudio(recording)}
-                        team={"blue"}
-                      />
-                    </div>
-                  )}
-                </div>
-              </Grid>
-            </WrappedAnimation>
-          </div>
-        )}
-
-        <div className="bg-gray-300 p-4 flex flex-col justify-end relative h-16">
-          {/* <Input className="flex items-center h-10 w-full rounded px-3 text-sm" type="text" placeholder="Type your message…" /> */}
-          <div className="absolute  bg-white top-0 dark:bg-gray-800 py-2 md:w-[100%] w-full rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 h-16 right-0">
-            <p className="flex justify-start ml-6 mt-2">
-              Click on mic to record
-            </p>
+       
+        <div className="p-4 flex flex-col justify-end">
+          {openVoiceCtrl && (
             <div
-              className="absolute inset-y-0 right-1 flex items-center pr-3 cursor-pointer mt-1"
-              onClick={() => {
-                setOpenVoiceCtrl(!openVoiceCtrl);
+              style={{
+                overflowY: "auto",
+                scrollbarWidth: "thin",
+                scrollbarColor: "var(--scrollbar-thumb) var(--scrollbar-track)",
+                aspectRatio: "3/2",
               }}
             >
-              <Mic className="cursor-pointer text-orange-400" />
+              <WrappedAnimation open={true}>
+                <Grid
+                  as="main"
+                  className="w-full inset-x-0 md:w-full lg:w-full  border bg-muted rounded-md shadow-md my-5 px-8 py-10 mx-auto overflow-y-auto md:overflow-y-auto lg:overflow-y-auto max-h-[30vh] md:max-h-[30vh] lg:max-h-[30vh]"
+                >
+                  <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1 align-top">
+                    {audio ? (
+                      <div className="mt-0">
+                        <AudioSubmitForm audio={audio} data={actionData} />
+                      </div>
+                    ) : (
+                      <div className="top-0">
+                        <CallRecorder
+                          onRecordingComplete={(recording) =>
+                            setAudio(recording)
+                          }
+                          team={"blue"}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </Grid>
+              </WrappedAnimation>
+            </div>
+          )}
+          <div className="relative">
+            <div className="absolute  bg-white bottom-0 dark:bg-gray-800 md:w-[100%] w-full rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 h-16 right-0">
+              <p className="flex justify-start ml-6 mt-2">
+                Click on mic to record
+              </p>
+              <div
+                className="absolute inset-y-0 right-1 flex items-center pr-3 cursor-pointer"
+                onClick={() => {
+                  setOpenVoiceCtrl(!openVoiceCtrl);
+                }}
+              >
+                <Mic className="cursor-pointer text-orange-400" />
+              </div>
             </div>
           </div>
         </div>

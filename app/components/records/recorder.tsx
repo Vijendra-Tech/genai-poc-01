@@ -829,7 +829,7 @@ const colors: [string, string, string] = ["orange", "orange", "orange"];
     };
   }, [stream, replay, metadata]);
 
-  return <canvas className="h-40 w-full" ref={canvasRef} />;
+  return <canvas className="h-20 w-full" ref={canvasRef} />;
 }
 
 function RecordingTime({ timer }: { timer: number }) {
