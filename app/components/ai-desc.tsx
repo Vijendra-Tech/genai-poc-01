@@ -13,11 +13,7 @@ function AiDesc() {
           cupidatat sit mollit proident. Esse labore nostrud sit esse in
           incididunt est fugiat commodo. Enim consequat esse duis in consequat
           laborum nostrud nostrud labore nulla ipsum exercitation minim. Ad
-          nostrud aliqua labore incididunt. Aliqua sit Lorem aliquip commodo
-          adipisicing amet ad magna et nostrud ullamco qui nostrud anim. Quis
-          eiusmod sunt est et labore culpa irure amet sit ut. Aliqua est et
-          reprehenderit minim minim aute sint id. Consectetur duis magna magna
-          qui. Labore magna commodo amet dolore ad officia aute nulla.
+          nostrud aliqua labore incididunt.
         </p>
       </div>
     </div>
