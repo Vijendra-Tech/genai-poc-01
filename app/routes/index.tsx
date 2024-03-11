@@ -157,7 +157,6 @@ export default function Index() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
-  console.error(error);
   return (
     <div>
         <div className="flex justify-center bg-orange-400 items-center mt-80 w-full">
