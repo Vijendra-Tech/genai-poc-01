@@ -94,7 +94,7 @@ function AudioSubmitForm({
         ) : null}
       </div>
       <Form onSubmit={handleSubmit}>
-        <div className="flex justify-between flex-row gap-2">
+        <div className="flex justify-between flex-col gap-2">
           <input type="hidden" name="audioUrl" value={audioURL} />
           {audioURL ? (
             <div className="">
