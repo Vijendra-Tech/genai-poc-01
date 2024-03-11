@@ -5,6 +5,7 @@ import { H2, H4 } from "#app/components/typography.tsx";
 import { Button } from "#app/components/ui/button.tsx";
 import { Link, Outlet, useActionData, useRouteError } from "@remix-run/react";
 import {
+  Angry,
   BotIcon,
   LucideVoicemail,
   MessageCircleCodeIcon,
@@ -159,15 +160,15 @@ export function ErrorBoundary() {
   console.error(error);
   return (
     <div>
-      <Grid nested>
-        <div className="col-span-6">
+        <div className="flex justify-center bg-orange-400 items-center mt-80 w-full">
+          <Angry size={'40px'}/>
           <H4 as="p">{`Yikes... Something went wrong. Sorry about that.`}</H4>
-          <H4 as="p" variant="secondary" className="mt-3">
+          <H4 as="p" variant="secondary" className="mt-10">
             {`Want to `}
             <Link to=".">try again?</Link>
           </H4>
         </div>
-      </Grid>
+        
     </div>
   );
 }
