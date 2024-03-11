@@ -3,6 +3,7 @@ import fs from "fs";
 import OpenAI from "openai";
 import { createObjectURL, base64StringToBlob } from "blob-util";
 import { eventStream } from "remix-utils/sse/server";
+import path from 'path'
 
 const openai = new OpenAI({
   apiKey: process.env.OPEN_AI_KEY,
@@ -35,7 +36,7 @@ export async function audioTotext(audio: string,language:string) {
   try {
     saveBase64AsMP3(audio,'speech','./app/audios')
     const transcription = await openai.audio.transcriptions.create({
-      file: fs.createReadStream("./app/audios/speech.mp3"),
+      file: fs.createReadStream(path.join(process.cwd(),"/app/audios/speech.mp3")),
       model: "whisper-1",
       response_format: "text",
       language: language,
