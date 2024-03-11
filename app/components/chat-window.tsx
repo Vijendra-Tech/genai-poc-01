@@ -1,5 +1,5 @@
 import { Input } from "#@/components/ui/input.tsx";
-import { useActionData } from "@remix-run/react";
+import { useActionData, useLoaderData } from "@remix-run/react";
 import {
   Bot,
   Croissant,
@@ -14,14 +14,42 @@ import { Grid } from "#app/components/grid.tsx";
 import { AudioSubmitForm, RecordingFormData } from "./records/record-form.tsx";
 import { CallRecorder } from "./records/recorder.tsx";
 import WrappedAnimation from "./wrapped-animation.tsx";
+import fs from "fs";
+import { json } from "@remix-run/node";
 
 type ActionData = RecordingFormData;
 
-function ChatWindow({ setOpenChatWindow }: any) {
-  const [responseAudio, setResponseAudio] = React.useState<Blob | null>(null);
+export async function loader() {
+  const audioFile = await fs.promises.readFile("./app/records/audio-file.mp3");
+  const audioBlob = new Blob([audioFile], { type: "audio/mp3" });
+  if(audioBlob){
+    return json({
+      audioBlob
+    })
+    // return audioBlob
+  }
+  else{
+    return json({
+      audioBlob
+    })
+    //  return audioBlob
+  }
+  
+}
+
+function ChatWindow({ setOpenChatWindow,data }: any) {
+  // const [responseAudio, setResponseAudio] = React.useState<Blob | null>(null);
   const [audio, setAudio] = React.useState<Blob | null>(null);
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   const actionData = useActionData<ActionData>();
+  const voice = useLoaderData<typeof loader>();
+  const audioURL = React.useMemo(() => {
+    if (voice) {
+      console.log('Voice',voice);
+      return window.URL.createObjectURL(voice.audioBlob as Blob);
+    }
+  }, [voice]);
+
   return (
     <div className="flex flex-col items-center justify-center w-screen text-gray-800 z-10 min-w-[30rem] min-h-[40rem] md:min-h-[32rem] lg:min-h-[32rem] fixed bottom-10 -right-1/4 lg:-right-1/5 md:-right-1/5">
       <div className="bg-orange-400 w-[36rem] md:w-[36rem] lg:w-[36rem] h-20 px-10 flex justify-start items-center">
@@ -38,9 +66,20 @@ function ChatWindow({ setOpenChatWindow }: any) {
             <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
             <div>
               <div className="bg-muted p-3 rounded-r-lg rounded-bl-lg">
+                {
+                  data?(
+                <audio
+                src={data.audio}
+                controls
+                preload="metadata"
+                aria-describedby="audio-error-message"
+              />
+                ):(
                 <p className="text-sm">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  User's voice will be displayed here.
                 </p>
+                  )
+                }
               </div>
               <span className="text-xs text-gray-500 leading-none">
                 2 min ago
@@ -50,10 +89,7 @@ function ChatWindow({ setOpenChatWindow }: any) {
           <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
             <div>
               <div className="bg-orange-400 text-white p-3 rounded-l-lg rounded-br-lg">
-                <p className="text-sm">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod.
-                </p>
+               {data?(<div>{data.msg}</div>):<p className="text-sm">Bot's response will be displayed here.</p>}
               </div>
               <span className="text-xs text-gray-500 leading-none">
                 2 min ago
@@ -61,6 +97,7 @@ function ChatWindow({ setOpenChatWindow }: any) {
             </div>
             <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
           </div>
+          
         </div>
 
         <div className="p-4 flex flex-col justify-end">
@@ -87,7 +124,9 @@ function ChatWindow({ setOpenChatWindow }: any) {
                       <div className="top-0">
                         <CallRecorder
                           onRecordingComplete={(recording) =>
-                            setAudio(recording)
+                          {  setAudio(recording)
+                              
+                          }
                           }
                           team={"blue"}
                         />
@@ -98,6 +137,7 @@ function ChatWindow({ setOpenChatWindow }: any) {
               </WrappedAnimation>
             </div>
           )}
+          {/* {data && (<div>{data.msg}</div>)} */}
           <div className="relative">
             <div className="absolute  bg-white bottom-0 dark:bg-gray-800 md:w-[100%] w-full rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 h-16 right-0">
               <p className="flex justify-start ml-6 mt-2">
@@ -119,5 +159,6 @@ function ChatWindow({ setOpenChatWindow }: any) {
     </div>
   );
 }
+const ChatWindowMemo = React.memo(ChatWindow)
 
-export default ChatWindow;
+export default ChatWindowMemo;

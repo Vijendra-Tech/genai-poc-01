@@ -61,12 +61,10 @@ export const action: ActionFunction = async ({ request }) => {
     }
 
     const { audio, language, audioUrl } = getNonNull(formData);
-    // console.log('data',{audio,language});
-    //call api and get response
     const apiResponse = await audioTotext(audio, language);
     console.log("----", apiResponse);
 
-    return json({ msg: apiResponse });
+    return json({ msg: apiResponse,audio });
   } catch (error: unknown) {
     actionData.errors.generalError = getErrorMessage(error);
     return json(actionData, 500);
@@ -140,7 +138,7 @@ export default function Index() {
     <div className="container w-full flex flex-row gap-0">
       <AssistentImage />
       <AiDesc />
-      {openChatWindow && <ChatWindow setOpenChatWindow={setOpenChatWindow} />}
+          {(openChatWindow ||actionData) && <ChatWindow setOpenChatWindow={setOpenChatWindow} data={actionData} />}
       {!openChatWindow && (
         <div
           className="fixed bottom-10 right-10 z-50"

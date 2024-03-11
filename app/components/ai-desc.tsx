@@ -1,6 +1,7 @@
 import React from "react";
 
 function AiDesc() {
+    
   return (
     <div className="flex flex-row relativen ">
       <div className="absolute mt-44 px-5 max-h-[400px] overflow-auto">

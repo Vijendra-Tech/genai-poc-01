@@ -24,4 +24,9 @@ node_modules
 # generated files
 /app/components/ui/icons
 
+/app/audios/speech.mp3
+/app/audios/
+
+*/audios/*
+
 tsconfig.tsbuildinfo

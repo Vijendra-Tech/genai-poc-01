@@ -42,8 +42,8 @@ export async function audioTotext(audio: string,language:string) {
       
     });
     if (transcription) {
-       console.log("transcription", transcription.text);
-       return transcription.text;
+       console.log("transcription", transcription);
+       return transcription;
     }
   } catch (error) {
     console.log("error occured", error);
