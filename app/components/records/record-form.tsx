@@ -60,12 +60,12 @@ function AudioSubmitForm({
   return (
     <div>
       <div className="mb-12">
-        {data?.errors.generalError ? (
+        {data?.errors?.generalError ? (
           <p id="audio-error-message" className="text-center text-red-500">
             {data.errors.generalError}
           </p>
         ) : null}
-        {data?.errors.audio ? (
+        {data?.errors?.audio ? (
           <p id="audio-error-message" className="text-red-600 text-center">
             {data.errors.audio}
           </p>
