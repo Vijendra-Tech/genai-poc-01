@@ -54,7 +54,7 @@ export async function audioTotext(audio: string,language:string) {
 }
 
 export async function textSpeech(input:string) {
-    const speechFile = path.resolve(path.join(process.cwd(),"/tmp/bot-speech.mp3"));
+    const speechFile = path.resolve(path.join(process.cwd(),"./tmp/bot-speech.mp3"));
     const mp3 = await openai.audio.speech.create({
     model: "tts-1",
     voice: "alloy",
@@ -66,7 +66,7 @@ export async function textSpeech(input:string) {
 }
 
 export const readFileAsBlob = async (filePath: string): Promise<string> => {
-  const speechFile = path.resolve(path.join(process.cwd(),"/tmp/bot-speech.mp3"))
+  const speechFile = path.resolve(path.join(process.cwd(),"./tmp/bot-speech.mp3"))
   return new Promise((resolve, reject) => {
     fs.readFile(speechFile, (error, data) => {
       if (error) {
