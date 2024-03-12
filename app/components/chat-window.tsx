@@ -114,9 +114,9 @@ function ChatWindow({ setOpenChatWindow,data }: any) {
                   className="w-full inset-x-0 md:w-full lg:w-full border bg-muted rounded-md shadow-md  overflow-y-auto md:overflow-y-auto lg:overflow-y-auto min-h-[200px] max-h-[200px]"
                 >
                   <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1 align-top">
-                    {(audio && !actionData) ? (
+                    {(audio && !actionData) || (actionData && actionData !== undefined && 'errors' in actionData && actionData.errors) ? (
                       <div className="mt-0">
-                        <AudioSubmitForm audio={audio} data={actionData} />
+                        <AudioSubmitForm audio={audio || undefined} data={actionData} />
                       </div>
                     ) : (
                      <>
