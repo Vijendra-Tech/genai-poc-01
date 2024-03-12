@@ -72,7 +72,7 @@ function AudioSubmitForm({
         ) : null}
       </div>
       <Form onSubmit={handleSubmit}>
-        <div className="flex justify-between flex-col gap-2">
+        <div className="flex justify-center flex-col gap-3 items-center">
           <input type="hidden" name="audioUrl" value={audioURL} />
           {audioURL ? (
             <div className="">
@@ -87,11 +87,11 @@ function AudioSubmitForm({
             "loading..."
           )}
           <Select name="language">
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select a Language" />
+            <SelectTrigger className="w-72">
+              <SelectValue placeholder="Select a Language for bot response" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
+            <SelectContent className="w-40 bg-muted">
+              <SelectGroup >
                 <SelectLabel>Languages</SelectLabel>
                 <SelectItem value="en">English</SelectItem>
                 <SelectItem value="hi">Hindi</SelectItem>
@@ -101,7 +101,7 @@ function AudioSubmitForm({
             </SelectContent>
           </Select>
         </div>
-        <Button type="submit" className="float-end">
+        <Button type="submit" className="float-end mr-32 mt-2">
           Submit Query
         </Button>
       </Form>
