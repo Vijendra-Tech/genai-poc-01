@@ -52,3 +52,29 @@ export async function audioTotext(audio: string,language:string) {
     return json({ error }, 500);
   }
 }
+
+export async function textSpeech(input:string) {
+    const speechFile = path.resolve(path.join(process.cwd(),"/app/audios/bot-speech.mp3"));
+    const mp3 = await openai.audio.speech.create({
+    model: "tts-1",
+    voice: "alloy",
+    input: input
+  });
+   const buffer = Buffer.from(await mp3.arrayBuffer());
+   await fs.promises.writeFile(speechFile, buffer);
+   
+}
+
+export const readFileAsBlob = async (filePath: string): Promise<string> => {
+  const speechFile = "./app/audios/bot-speech.mp3";
+  return new Promise((resolve, reject) => {
+    fs.readFile(speechFile, (error, data) => {
+      if (error) {
+        reject(error);
+      } else {
+        const type ='data:audio/mp3;base64,'
+        resolve(type+Buffer.from(data).toString('base64'));
+      }
+    });
+  });
+};

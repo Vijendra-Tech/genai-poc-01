@@ -82,7 +82,12 @@ function ChatWindow({ setOpenChatWindow,data }: any) {
           <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
             <div>
               <div className="bg-orange-400 text-white p-3 rounded-l-lg rounded-br-lg">
-               {data?(<div>{data.msg}</div>):<p className="text-sm">Bot's response will be displayed here.</p>}
+               {data?(<audio
+                src={data.fileBlob}
+                controls
+                preload="metadata"
+                aria-describedby="audio-error-message"
+              />):<p className="text-sm">Bot's response will be displayed here.</p>}
               </div>
               <span className="text-xs text-gray-500 leading-none">
                 2 min ago
@@ -94,7 +99,7 @@ function ChatWindow({ setOpenChatWindow,data }: any) {
         </div>
 
         <div className="p-4 flex flex-col justify-end">
-          {openVoiceCtrl && (
+          {openVoiceCtrl && !actionData && (
             <div
               style={{
                 overflowY: "auto",
@@ -109,11 +114,14 @@ function ChatWindow({ setOpenChatWindow,data }: any) {
                   className="w-full inset-x-0 md:w-full lg:w-full border bg-muted rounded-md shadow-md  overflow-y-auto md:overflow-y-auto lg:overflow-y-auto min-h-[200px] max-h-[200px]"
                 >
                   <div className="col-span-full lg:col-span-12 lg:col-start-1 md:col-span-12 md:col-start-1 align-top">
-                    {audio ? (
+                    {(audio && !actionData) ? (
                       <div className="mt-0">
                         <AudioSubmitForm audio={audio} data={actionData} />
                       </div>
                     ) : (
+                     <>
+                     {
+                       !actionData && (
                       <div className="top-0">
                         <CallRecorder
                           onRecordingComplete={(recording) =>
@@ -124,6 +132,10 @@ function ChatWindow({ setOpenChatWindow,data }: any) {
                           team={"blue"}
                         />
                       </div>
+                       )
+                     }
+                     
+                     </>
                     )}
                   </div>
                 </Grid>

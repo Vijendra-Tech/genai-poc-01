@@ -28,11 +28,12 @@ import {
   getErrorMessage,
   getNonNull,
 } from "#app/utils/misc.tsx";
-import { audioTotext } from "#app/utils/llms.server.ts";
+import { audioTotext, readFileAsBlob, textSpeech } from "#app/utils/llms.server.ts";
 import LLMAPIResponseUI from "#app/components/response-ui.tsx";
 import ChatWindow from "#app/components/chat-window.tsx";
 import AssistentImage from "#app/components/assistent-image.tsx";
 import AiDesc from "#app/components/ai-desc.tsx";
+import path from 'path'
 
 type ActionData = RecordingFormData;
 
@@ -63,9 +64,15 @@ export const action: ActionFunction = async ({ request }) => {
 
     const { audio, language, audioUrl } = getNonNull(formData);
     const apiResponse = await audioTotext(audio, language);
+    if(typeof apiResponse ==='string'){
+      await textSpeech(apiResponse)
+    }
+    // Usage
+    const fileBlob = await readFileAsBlob("");
+   
     console.log("----", apiResponse);
 
-    return json({ msg: apiResponse,audio });
+    return json({ msg: apiResponse,audio,fileBlob});
   } catch (error: unknown) {
     actionData.errors.generalError = getErrorMessage(error);
     return json(actionData, 500);
@@ -139,7 +146,7 @@ export default function Index() {
     <div className="container w-full flex flex-row gap-0">
       <AssistentImage />
       <AiDesc />
-          {(openChatWindow ||actionData) && <ChatWindow setOpenChatWindow={setOpenChatWindow} data={actionData} />}
+          {(openChatWindow ||(openChatWindow && actionData)) && <ChatWindow setOpenChatWindow={setOpenChatWindow} data={actionData} />}
       {!openChatWindow && (
         <div
           className="fixed bottom-10 right-10 z-50"
