@@ -66,7 +66,7 @@ export async function textSpeech(input:string) {
 }
 
 export const readFileAsBlob = async (filePath: string): Promise<string> => {
-  const speechFile = "./app/audios/bot-speech.mp3";
+  const speechFile = path.resolve(path.join(process.cwd(),"/app/audios/bot-speech.mp3"))
   return new Promise((resolve, reject) => {
     fs.readFile(speechFile, (error, data) => {
       if (error) {
