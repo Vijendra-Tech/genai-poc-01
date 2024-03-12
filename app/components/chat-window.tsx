@@ -8,6 +8,7 @@ import {
   MessageSquareX,
   Mic,
   Mic2,
+  User,
 } from "lucide-react";
 import React, { useState } from "react";
 import { Grid } from "#app/components/grid.tsx";
@@ -16,6 +17,7 @@ import { CallRecorder } from "./records/recorder.tsx";
 import WrappedAnimation from "./wrapped-animation.tsx";
 import fs from "fs";
 import { json } from "@remix-run/node";
+import { H1, H4 } from "./typography.tsx";
 
 type ActionData = RecordingFormData;
 
@@ -56,7 +58,7 @@ function ChatWindow({ setOpenChatWindow,data }: any) {
       <div className="flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden">
         <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
           <div className="flex w-full mt-2 space-x-3 max-w-xs">
-            <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+            <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"><User className="mx-2 my-2" /></div>
             <div>
               <div className="bg-muted p-3 rounded-r-lg rounded-bl-lg">
                 {
@@ -82,18 +84,24 @@ function ChatWindow({ setOpenChatWindow,data }: any) {
           <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
             <div>
               <div className="bg-orange-400 text-white p-3 rounded-l-lg rounded-br-lg">
-               {data?(<audio
+               {data?(
+                <>
+               <audio
                 src={data.fileBlob}
                 controls
                 preload="metadata"
                 aria-describedby="audio-error-message"
-              />):<p className="text-sm">Bot's response will be displayed here.</p>}
+              />
+              <H4 as={'p'} className="text-pretty text-sm">Transcript</H4>
+               <p className="text-sm">{data.msg}</p>
+               </>
+              ):<p className="text-sm">Bot's response will be displayed here.</p>}
               </div>
               <span className="text-xs text-gray-500 leading-none">
                 2 min ago
               </span>
             </div>
-            <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+            <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 justify-center"><Bot className="mx-2 my-2"/></div>
           </div>
           
         </div>
