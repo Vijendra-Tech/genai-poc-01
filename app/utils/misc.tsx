@@ -1,6 +1,9 @@
 import { useFormAction, useNavigation } from '@remix-run/react'
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+// import { PDFLoader } from "langchain/document_loaders/fs/pdf";
+// //@ts-ignore
+// import * as parse from "pdf-parse";
 
 /**
  * Does its best to get a string error message from an unknown error.
@@ -121,3 +124,25 @@ export function getErrorForAudio(audio: string | null) {
   if (!audio) return "Audio file is required";
   return null;
 }
+
+export function combineDocuments(docs:any){
+    return docs.map((doc:any)=>doc.pageContent).join('\n\n')
+}
+
+export  function formatConvHistory(messages: string[]) {
+	return messages.map((message, i) => {
+		if (i % 2 === 0){
+			return `Human: ${message}`
+		} else {
+			return `AI: ${message}`
+		}
+	}).join('\n')
+}
+
+
+
+// export async function loadpdf() {
+//     const loader = new PDFLoader('app/assets/faq.pdf')
+//     const docs = await loader.load();
+//     return docs
+// }
