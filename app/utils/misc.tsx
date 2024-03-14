@@ -1,6 +1,7 @@
 import { useFormAction, useNavigation } from '@remix-run/react'
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+import translate from 'translate'
 // import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 // //@ts-ignore
 // import * as parse from "pdf-parse";
@@ -137,6 +138,15 @@ export  function formatConvHistory(messages: string[]) {
 			return `AI: ${message}`
 		}
 	}).join('\n')
+}
+
+
+export async function translateFrom(str:string, language:string) {
+	//@ts-ignore
+	translate.engine = 'libre'; 
+	const translated_string = await translate(str, language);
+	console.log(translated_string);
+	return translated_string
 }
 
 

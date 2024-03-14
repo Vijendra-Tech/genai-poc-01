@@ -144,7 +144,7 @@ export default function Index() {
   const [openChatWindow, setOpenChatWindow] = useState(false);
   return (
     <div className="container w-full flex flex-row gap-0">
-      <AssistentImage />
+      <AssistentImage src=""/>
       <AiDesc />
           {(openChatWindow ||(openChatWindow && actionData)) && <ChatWindow setOpenChatWindow={setOpenChatWindow} data={actionData} />}
       {!openChatWindow && (

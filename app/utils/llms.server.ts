@@ -39,7 +39,7 @@ export async function audioTotext(audio: string,language:string) {
       file: fs.createReadStream(path.join(process.cwd(),"/app/audios/speech.mp3")),
       model: "whisper-1",
       response_format: "text",
-      language: language,
+      language: 'en',
       
     });
     if (transcription) {
@@ -63,7 +63,7 @@ export async function textSpeech(input:string) {
     const mp3 = await openai.audio.speech.create({
     model: "tts-1",
     voice: "alloy",
-    input: input
+    input: input,
   });
    const buffer = Buffer.from(await mp3.arrayBuffer());
    await fs.promises.writeFile(speechFile, buffer);

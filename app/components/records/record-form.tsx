@@ -15,12 +15,14 @@ type RecordingFormData = {
   fields: {
     audio?: never;
     language?: string | null;
-    msg?: string
+    msg?: string,
+    question?: string
   };
   errors: {
     generalError?: string;
     audio?: string | null;
     language?: string | null;
+    question?: string | null
   };
 };
 
