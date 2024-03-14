@@ -15,7 +15,7 @@ type RecordingFormData = {
   fields: {
     audio?: never;
     language?: string | null;
-    msg?:string
+    msg?: string
   };
   errors: {
     generalError?: string;
@@ -59,7 +59,7 @@ function AudioSubmitForm({
 
   return (
     <div>
-      <div className="mb-12">
+      <div className="">
         {data?.errors?.generalError ? (
           <p id="audio-error-message" className="text-center text-red-500">
             {data.errors.generalError}
@@ -72,7 +72,7 @@ function AudioSubmitForm({
         ) : null}
       </div>
       <Form onSubmit={handleSubmit}>
-        <div className="flex justify-center flex-col gap-3 items-center">
+        <div className="flex justify-center flex-col gap-1 items-center">
           <input type="hidden" name="audioUrl" value={audioURL} />
           {audioURL ? (
             <div className="">
@@ -100,10 +100,10 @@ function AudioSubmitForm({
               </SelectGroup>
             </SelectContent>
           </Select>
+          <Button type="submit" className="">
+            Submit Query
+          </Button>
         </div>
-        <Button type="submit" className="float-end mr-32 mt-2">
-          Submit Query
-        </Button>
       </Form>
     </div>
   );

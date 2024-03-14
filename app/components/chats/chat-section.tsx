@@ -7,7 +7,7 @@
 */
 import { Button } from '#@/components/ui/button.tsx';
 import { Input } from '#@/components/ui/input.tsx';
-import { Bot, User } from 'lucide-react';
+import { Bot, Loader, User } from 'lucide-react';
 import React from 'react';
 import CharForm from './chat-form.tsx';
 
@@ -20,24 +20,28 @@ type chatSectionProps = {
 const ChatSection = ({ userInput, botOuput, children }: chatSectionProps) => {
     return (
         <div className="fixed right-10 bottom-10 w-1/3 h-2/3 bg-white shadow-lg rounded-lg">
-            {/* Chat window content */}
             <div className="flex flex-col h-full">
-                {/* User messages */}
-
+                {
+                    userInput && (
+                       <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 mx-2 my-1"><User className="mx-2 my-2"/></div>
+                        
+                    )
+                }
                 <div className="flex-grow p-4">
-                    {/* User message content */}
-                    <User />
                     {userInput}
                 </div>
-                {/* Bot messages */}
-                <div className="bg-gray-100 p-4">
-                    {/* Bot message content */}
-                    <Bot />
-                    {botOuput}
+                {
+                    botOuput && (
+                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 mx-2 my-1"><Bot className="mx-2 my-2"/></div>
+                    )
+                }
+                <div className="p-4">
+                    {
+                        botOuput ? <p>{botOuput}</p> : (botOuput?.length ?? 0) > 0 ? <Loader /> : null
+                    }
                 </div>
                 <div className="flex items-center justify-end p-4">
                     {children}
-                    {/* <CharForm /> */}
                 </div>
             </div>
         </div>

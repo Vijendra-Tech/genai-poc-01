@@ -28,7 +28,7 @@ function WrappedAnimation({open=true,children}:props) {
           initial="collapsed"
           animate="expanded"
           exit="collapsed"
-          transition={{ duration: 0.20 }}
+          transition={{ duration: 0.15 }}
           className="relative col-span-full"
         >
           {children}
