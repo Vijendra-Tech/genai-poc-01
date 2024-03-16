@@ -10,14 +10,16 @@ import { Input } from '#@/components/ui/input.tsx';
 import { Bot, Loader, MessageSquareX, User } from 'lucide-react';
 import React from 'react';
 import CharForm from './chat-form.tsx';
+import { BotSkelton, UserSkeleton } from '../ui/skelton-bot.tsx';
 
 type chatSectionProps = {
     userInput?: string,
     botOuput?: string,
-    children: React.ReactNode
+    children: React.ReactNode,
+    stages?: any
 }
 
-const ChatSection = ({ userInput, botOuput, children }: chatSectionProps) => {
+const ChatSection = ({ userInput, botOuput, children, stages }: chatSectionProps) => {
     return (
         <div className="fixed right-10 bottom-10 w-1/3 h-2/3 bg-white shadow-lg rounded-lg">
             <div className="bg-muted flex justify-start items-center h-14">
@@ -28,37 +30,69 @@ const ChatSection = ({ userInput, botOuput, children }: chatSectionProps) => {
                 // onClick={() => setOpenChatWindow(false)}
                 />
             </div>
-            <div className="flex flex-col h-full">
-                {
-                    userInput && (
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 mx-2 my-1"><User className="mx-2 my-2" /></div>
-
-                    )
-                }
-                <div className="flex-grow p-4">
-                    <audio
-                        src={userInput}
-                        controls
-                        preload="metadata"
-                        aria-describedby="audio-error-message"
-                    />
-                    {/* {userInput} */}
-                </div>
-                {
-                    botOuput && (
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 mx-2 my-1"><Bot className="mx-2 my-2" /></div>
-                    )
-                }
-                <div className="p-4">
+            <div className="flex flex-col flex-grow h-full p-4 overflow-auto">
+                <div className="flex w-full mt-2 space-x-3">
                     {
-                        botOuput ? <audio
-                            src={botOuput}
-                            controls
-                            preload="metadata"
-                            aria-describedby="audio-error-message"
-                        /> : (botOuput?.length ?? 0) > 0 ? <Loader /> : null
+                        stages?.one && (
+                            <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 mx-2 my-1"><User className="mx-2 my-2" /></div>
+
+                        )
+                    }
+                    {
+                        stages?.one && (
+                            <div className="bg-muted text-white p-3 rounded-l-lg rounded-br-lg">
+                                <audio
+                                    src={userInput}
+                                    controls
+                                    preload="metadata"
+                                    aria-describedby="audio-error-message"
+                                />
+
+                            </div>
+                        ) 
                     }
                 </div>
+                <div className="flex w-full mt-2 space-x-3  ml-auto justify-end max-w-xs">
+                    {
+                        stages?.four ? (
+
+                            <div className="bg-muted text-white p-3 rounded-l-lg rounded-br-lg">
+                                <audio
+                                    src={botOuput}
+                                    controls
+                                    preload="metadata"
+                                    aria-describedby="audio-error-message"
+                                />
+                            </div>
+                        ) : (
+                            <>
+                            {
+                                stages?.one ?(
+                                    <BotSkelton />
+                                ):null
+                            }
+                            </>
+                        )
+                    }
+
+                    {
+                        stages?.four && (
+                            <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 mx-2 my-1"><Bot className="mx-2 my-2" /></div>
+                        )
+                    }
+                </div>
+                {
+                    botOuput ? (
+                        // 
+                        // <label></label>
+                        <></>
+                    ) : (
+                        <>
+                            <div className="flex w-full mt-2 space-x-3  ml-auto justify-end max-w-xs h-28"></div>
+                            {/* <div className="flex w-full mt-2 space-x-3  ml-auto justify-end max-w-xs h-10"></div> */}
+                        </>
+                    )
+                }
                 <div className="flex items-center justify-end p-4">
                     {children}
                 </div>

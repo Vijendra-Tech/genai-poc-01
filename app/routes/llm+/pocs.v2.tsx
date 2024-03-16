@@ -1,6 +1,6 @@
 import WrappedComponent from '#app/components/wrapped-component.tsx'
 import { textEmbedding } from '#app/utils/text.server.ts'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ActionFunctionArgs, json } from "@remix-run/node";
 import { Form, Link, useActionData, useRouteError, useSubmit } from '@remix-run/react'
 import { Input } from '#@/components/ui/input.tsx';
@@ -10,7 +10,7 @@ import ChatSection from '#app/components/chats/chat-section.tsx';
 import { Angry, MessageCircleCodeIcon, Mic } from 'lucide-react';
 import { getErrorForAudio, getErrorForLanguage, getNonNull, translateFrom } from '#app/utils/misc.tsx';
 import { Textarea } from '#app/components/ui/textarea.tsx';
-import { H4 } from '#app/components/typography.tsx';
+import { H3, H4 } from '#app/components/typography.tsx';
 import WrappedAnimation from '#app/components/wrapped-animation.tsx';
 import { CallRecorder } from '#app/components/records/recorder.tsx';
 import { AudioSubmitForm, RecordingFormData } from '#app/components/records/record-form.tsx';
@@ -19,6 +19,11 @@ import AssistentImage from '#app/components/assistent-image.tsx';
 import AiDesc from '#app/components/ai-desc.tsx';
 import { audioTotext, readFileAsBlob, textSpeech } from '#app/utils/llms.server.ts';
 import { translateTo } from '#app/utils/translation.server.ts';
+import { Skeleton } from '#@/components/ui/skeleton.tsx';
+import { BotSkelton, UserSkeleton } from '#app/components/ui/skelton-bot.tsx';
+import Workflow from '#app/components/ui/workflow.tsx';
+import { useMachine } from "@xstate/react";
+import { assign, createMachine, send as sendUtil } from "xstate";
 
 // export async function loader() {
 //     //  await textEmbedding()
@@ -57,8 +62,8 @@ export async function action({ request }: ActionFunctionArgs) {
         if (typeof textAsk === 'string') {
             const TxtResponse = await FaqQA(textAsk)
             if (TxtResponse) {
-                const translatedTxt = await translateTo(TxtResponse,language)
-                
+                const translatedTxt = await translateTo(TxtResponse, language)
+
                 if (translatedTxt !== null) {
                     await textSpeech(translatedTxt);
                 }
@@ -79,68 +84,118 @@ function BankingPOCVersionTwo() {
     const [audio, setAudio] = React.useState<Blob | null>(null);
     const [showRec, setShowRec] = useState<boolean>(false)
     const [openChatWindow, setOpenChatWindow] = useState(false);
+        const actionData = useActionData<typeof action>()
+    //manage workfloe steps
+    const [stages, setStages] = useState<any>({
+        one: false,
+        two: false,
+        three: false,
+        four: false
+    })
+
+    useEffect(() => {
+        let timer: any
+        if (stages.one) {
+            timer = setTimeout(() => {
+                setStages((prev: any) => ({
+                    ...prev,
+                    two: true,
+                    three:true
+                }))
+            }, 2000)
+        }
+        return () => clearInterval(timer)
+    }, [stages])
+
+    useEffect(() => {
+        if (actionData?.fileBlob) {
+            setStages((prev: any) => ({
+                ...prev,
+                four: true
+            }))
+
+        }
+    }, [actionData?.fileBlob])
+
     const submit = useSubmit()
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const form = new FormData(e.currentTarget)
         setMsg(form.get('question'))
+        // setStages((prev: any) => ({
+        //     ...prev,
+        //     one: true
+        // }))
         submit(form, {
             method: 'POST'
         })
         e.currentTarget.reset();
     }
-    const actionData = useActionData<typeof action>()
+
     return (
-        <div className='container w-full flex flex-row'>
-            <AssistentImage src={botImg} />
-            <AiDesc />
+        <div className='container w-full flex flex-row justify-center'>
+            {/* <AssistentImage src={botImg} /> */}
+            {/* <AiDesc /> */}
+
+            <div className='flex items-center space-x-3'>
+                {/* <div><UserSkeleton/></div>
+                <div><BotSkelton /></div> */}
+            </div>
             {
                 openChatWindow ? (
-
-                    <ChatSection userInput={actionData?.audio} botOuput={actionData?.fileBlob}>
-                        <div className='relative w-full '>
-                            {
-                                showRec && (
-                                    <WrappedAnimation open={true}>
-                                        {
-                                            audio ? (<div className="bg-muted my-auto p-2">
-                                                <AudioSubmitForm audio={audio} data={actionData} />
-                                            </div>) : (
-                                                <div
-                                                    style={{
-                                                        overflowY: "auto",
-                                                        scrollbarWidth: "thin",
-                                                        scrollbarColor: "var(--scrollbar-thumb) var(--scrollbar-track)",
-                                                        // aspectRatio: "3/2",
-                                                        maxHeight: '200px'
-                                                    }}
-                                                >
-                                                    <div className="bg-muted my-auto p-2">
-                                                        <CallRecorder
-                                                            onRecordingComplete={(recording) => {
-                                                                setAudio(recording)
-
-                                                            }
-                                                            }
-                                                            team={"blue"}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            )
-                                        }
-                                    </WrappedAnimation>
-                                )
-                            }
-                            <div className='mb-16'>
-                                <Form onSubmit={handleSubmit}>
-                                    <Input placeholder='Ask/Click on Mic' name='question' className='' />
-                                    <Button className="absolute text-white font-bold bottom-16 right-0 " type='button'>
-                                        <Mic onClick={() => setShowRec(!showRec)} />
-                                    </Button>
-                                </Form>
-                            </div>
+                    <>
+                        <div className='mt-52 bg-white w-1/3 text-black min-h-[610px] flex justify-center ml-2 rounded-l-3xl'>
+                            {/* <H4>Workflow</H4> */}
+                            <Workflow stages={stages} />
                         </div>
-                    </ChatSection>
+                        <ChatSection userInput={actionData?.audio} botOuput={actionData?.fileBlob} stages={stages} >
+                            <div className='relative w-full'>
+                                {
+                                    showRec && (
+                                        <WrappedAnimation open={true}>
+                                            {
+                                                audio ? (<div className="bg-muted p-2">
+                                                    <AudioSubmitForm audio={audio} data={actionData} reset={setAudio} setStages={setStages}/>
+                                                </div>) : (
+                                                    <div
+                                                        style={{
+                                                            overflowY: "auto",
+                                                            scrollbarWidth: "thin",
+                                                            scrollbarColor: "var(--scrollbar-thumb) var(--scrollbar-track)",
+                                                            // aspectRatio: "3/2",
+                                                            maxHeight: '200px'
+                                                        }}
+                                                    >
+                                                        <div className="bg-muted my-auto p-2">
+                                                            <CallRecorder
+                                                                onRecordingComplete={(recording) => {
+                                                                    setAudio(recording)
+
+                                                                }
+                                                                }
+                                                                team={"blue"}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }
+                                        </WrappedAnimation>
+
+                                    )
+                                }
+                                {/* <div className='relative'> */}
+                                <div className='absolute bottom-0 right-0 w-full top-[300px]'>
+                                    <Form onSubmit={handleSubmit}>
+                                        <Input placeholder='Ask/Click on Mic' name='question' className='' disabled />
+                                        <Button className="absolute text-white font-bold -bottom-9 right-0 " type='button'>
+                                            <Mic onClick={() => setShowRec(!showRec)} />
+                                        </Button>
+                                    </Form>
+                                </div>
+                                {/* </div> */}
+                            </div>
+                        </ChatSection>
+                    </>
                 ) : (
 
                     <div
@@ -155,8 +210,6 @@ function BankingPOCVersionTwo() {
                     </div>
                 )
             }
-
-
         </div>
     )
 

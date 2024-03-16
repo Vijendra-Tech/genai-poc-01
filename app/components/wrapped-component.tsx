@@ -3,14 +3,15 @@ import { H3 } from './typography.tsx'
 
 interface props {
     heading: string,
-    children: React.ReactNode
+    children: React.ReactNode,
+    className?:string
 }
 
-function WrappedComponent({heading,children}:props) {
+function WrappedComponent({heading,children,className}:props) {
     return (
-        <div className='container flex flex-col justify-center items-center'>
+        <div className='container'>
           <H3 as={'h3'}>{heading}</H3>
-           <div>
+           <div className={className}>
             {children}
            </div>
         </div>

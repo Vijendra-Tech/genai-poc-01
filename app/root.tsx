@@ -66,8 +66,8 @@ export default function App() {
           </Link>
           <div className="flex flex-row gap-20">
             <Link to="/">Home</Link>
+            <Link to="/llm/pocs/v2">Chat</Link>
             <Link to="/about">About</Link>
-            <Link to="/dashboard">Dashboard</Link>
           </div>
         </nav>
       </header>

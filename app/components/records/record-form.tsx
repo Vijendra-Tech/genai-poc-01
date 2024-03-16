@@ -30,10 +30,14 @@ function AudioSubmitForm({
   audio,
   data,
   additionalFields,
+  reset,
+  setStages
 }: {
   audio: Blob;
   data?: RecordingFormData;
   additionalFields?: React.ReactElement;
+  reset: any,
+  setStages:any
 }) {
   const audioURL = React.useMemo(() => {
     return window.URL.createObjectURL(audio);
@@ -44,6 +48,9 @@ function AudioSubmitForm({
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const reader = new FileReader();
+    setStages((prev: any) => ({
+      one: true
+    }))
     reader.readAsDataURL(audio);
     reader.addEventListener(
       "loadend",
@@ -102,9 +109,14 @@ function AudioSubmitForm({
               </SelectGroup>
             </SelectContent>
           </Select>
-          <Button type="submit" className="">
-            Submit Query
-          </Button>
+          <div className="flex flex-row gap-2">
+            <Button type="submit" className="">
+              Submit Query
+            </Button>
+            <Button type="button" className="" onClick={() => reset(null)}>
+              Reset
+            </Button>
+          </div>
         </div>
       </Form>
     </div>
