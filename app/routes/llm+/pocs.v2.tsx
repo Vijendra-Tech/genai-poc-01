@@ -25,12 +25,6 @@ import Workflow from '#app/components/ui/workflow.tsx';
 import { useMachine } from "@xstate/react";
 import { assign, createMachine, send as sendUtil } from "xstate";
 
-// export async function loader() {
-//     //  await textEmbedding()
-//     return json({
-//         ok: true
-//     })
-// }\
 type ActionData = RecordingFormData;
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -134,12 +128,7 @@ function BankingPOCVersionTwo() {
 
     return (
         <div className='container w-full flex flex-row justify-center'>
-            {/* <AssistentImage src={botImg} /> */}
-            {/* <AiDesc /> */}
-
             <div className='flex items-center space-x-3'>
-                {/* <div><UserSkeleton/></div>
-                <div><BotSkelton /></div> */}
             </div>
             {
                 openChatWindow ? (

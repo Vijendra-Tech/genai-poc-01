@@ -2,6 +2,7 @@ import { Input } from '#@/components/ui/input.tsx';
 import React from 'react';
 import { H4 } from '../typography.tsx';
 import BotProgress from './bot-progress.tsx';
+import FaqSheet from '../faq-sheet.tsx';
 
 /*
     create stepper workflow component using tailwind css
@@ -24,7 +25,12 @@ const Workflow: React.FC = ({ stages }: props) => {
     }
     return (
         <>
-            <H4 className='px-10'>Flow</H4>
+            <div className='flex flex-col gap-2 px-8'>
+                <H4 className='px-2'>Flow</H4>
+                <div className='h-[720px] overflow-auto'>
+                    <FaqSheet fileUrl='../../faq.pdf' side="left" />
+                </div>
+            </div>
             <ol className="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400">
                 <li className="mb-10 ms-6">
                     <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
@@ -75,7 +81,7 @@ const Workflow: React.FC = ({ stages }: props) => {
                 {
                     stages.one && (
                         <li className='mt-56 mx-2'>
-                            <BotProgress stages={stages}/>
+                            <BotProgress stages={stages} />
                         </li>
                     )
                 }

@@ -3,7 +3,7 @@ import { Grid } from "#app/components/grid.tsx";
 import { CallRecorder } from "#app/components/records/recorder.tsx";
 import { H2, H4 } from "#app/components/typography.tsx";
 import { Button } from "#app/components/ui/button.tsx";
-import { Link, Outlet, useActionData, useRouteError } from "@remix-run/react";
+import { Link, Outlet, useActionData, useLoaderData, useRouteError } from "@remix-run/react";
 import {
   Angry,
   BotIcon,
@@ -34,6 +34,8 @@ import ChatWindow from "#app/components/chat-window.tsx";
 import AssistentImage from "#app/components/assistent-image.tsx";
 import AiDesc from "#app/components/ai-desc.tsx";
 import path from 'path'
+import TabSection from "#app/components/tabs-section.tsx";
+import { loadgithubFiles } from "#app/utils/code.server.ts";
 
 type ActionData = RecordingFormData;
 
@@ -142,22 +144,16 @@ export default function Index() {
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   const actionData = useActionData<ActionData>();
   const [openChatWindow, setOpenChatWindow] = useState(false);
+
   return (
     <div className="container w-full flex flex-row gap-0">
-      <AssistentImage src=""/>
-      <AiDesc />
+      {/* <AssistentImage src=""/> */}
+     <AiDesc />
+      <div className="flex flex-row justify-end">
+        <div className="min-w-[300px]"></div>
+         <div className="ml-96 mt-6"><TabSection codes={[]}/></div>
+      </div>
           {(openChatWindow ||(openChatWindow && actionData)) && <ChatWindow setOpenChatWindow={setOpenChatWindow} data={actionData} />}
-      {!openChatWindow && (
-        <div
-          className="fixed bottom-10 right-10 z-50"
-          onClick={() => setOpenVoiceCtrl(!openVoiceCtrl)}
-        >
-          <MessageCircleCodeIcon
-            size={"90px"}
-            onClick={() => setOpenChatWindow(!openChatWindow)}
-          />
-        </div>
-      )}
     </div>
   );
 }

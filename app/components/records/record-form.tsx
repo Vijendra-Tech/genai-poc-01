@@ -37,7 +37,7 @@ function AudioSubmitForm({
   data?: RecordingFormData;
   additionalFields?: React.ReactElement;
   reset: any,
-  setStages:any
+  setStages: any
 }) {
   const audioURL = React.useMemo(() => {
     return window.URL.createObjectURL(audio);
@@ -106,6 +106,9 @@ function AudioSubmitForm({
                 <SelectItem value="hi">Hindi</SelectItem>
                 <SelectItem value="ta">Tamil</SelectItem>
                 <SelectItem value="bn">Bangoli</SelectItem>
+                <SelectItem value="kn">Kannada</SelectItem>
+                <SelectItem value="te">Telugu</SelectItem>
+                <SelectItem value="ml">Malayalam</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

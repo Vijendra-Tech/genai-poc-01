@@ -109,6 +109,7 @@ export async function loadpdf() {
     return docs
 }
 
+
 //  function splilitter() {
 //     const splitter = new RecursiveCharacterTextSplitter({
 //         chunkSize: 1536,
