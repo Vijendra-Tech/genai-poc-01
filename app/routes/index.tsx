@@ -147,8 +147,8 @@ export default function Index() {
 
   return (
     <div className="container w-full flex flex-row gap-0">
-      {/* <AssistentImage src=""/> */}
      <AiDesc />
+     <img src="./ai.png" alt="AI" className="w-1/2 h-1/2 mt-80"  height={200} width={200}/>
       <div className="flex flex-row justify-end">
         <div className="min-w-[300px]"></div>
          <div className="ml-96 mt-6"><TabSection codes={[]}/></div>

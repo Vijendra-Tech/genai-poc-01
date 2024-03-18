@@ -5,10 +5,10 @@ import React from 'react'
 
 function ChatForm() {
     return (
-        <div className='relative w-full'>
-            <Input placeholder='Ask Queries'/>
+        <div className='w-full fixed  inset-0 mt-40 '>
+            <Input placeholder='Ask Queries' className=''/>
             <Button className="absolute text-white font-bold top-0 right-0 ">
-               <Mic />
+                <Mic />
             </Button>
         </div>
     )

@@ -116,10 +116,6 @@ function BankingPOCVersionTwo() {
         e.preventDefault()
         const form = new FormData(e.currentTarget)
         setMsg(form.get('question'))
-        // setStages((prev: any) => ({
-        //     ...prev,
-        //     one: true
-        // }))
         submit(form, {
             method: 'POST'
         })
@@ -133,8 +129,7 @@ function BankingPOCVersionTwo() {
             {
                 openChatWindow ? (
                     <>
-                        <div className='mt-52 bg-white w-1/3 text-black min-h-[610px] flex justify-center ml-2 rounded-l-3xl'>
-                            {/* <H4>Workflow</H4> */}
+                        <div className='bg-white w-1/4 text-black h-[720px] flex justify-center ml-64 rounded-l-3xl fixed top-44'>
                             <Workflow stages={stages} />
                         </div>
                         <ChatSection userInput={actionData?.audio} botOuput={actionData?.fileBlob} stages={stages} >
@@ -173,10 +168,10 @@ function BankingPOCVersionTwo() {
                                     )
                                 }
                                 {/* <div className='relative'> */}
-                                <div className='absolute bottom-0 right-0 w-full top-[300px]'>
+                                <div className='fixed bottom-0 w-1/4 top-[50rem] pr-14'>
                                     <Form onSubmit={handleSubmit}>
                                         <Input placeholder='Ask/Click on Mic' name='question' className='' disabled />
-                                        <Button className="absolute text-white font-bold -bottom-9 right-0 " type='button'>
+                                        <Button className="text-white font-bold fixed right-0 mr-16 -mt-9" type='button'>
                                             <Mic onClick={() => setShowRec(!showRec)} />
                                         </Button>
                                     </Form>
