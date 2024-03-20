@@ -68,6 +68,7 @@ export default function App() {
             <Link to="/">Home</Link>
             <Link to="/llm/pocs/v2">Chat</Link>
             <Link to="/about">About</Link>
+            <Link to="/threeD">3D Play</Link>
           </div>
         </nav>
       </header>

@@ -9,7 +9,7 @@ interface props {
 
 function WrappedComponent({heading,children,className}:props) {
     return (
-        <div className='container'>
+        <div className='container mt-10'>
           <H3 as={'h3'}>{heading}</H3>
            <div className={className}>
             {children}

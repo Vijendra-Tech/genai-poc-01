@@ -63,6 +63,7 @@
     "ignore": "^5.3.1",
     "isbot": "^3.7.0",
     "langchain": "^0.1.26",
+    "lottie-react": "^2.4.0",
     "lucide-react": "^0.350.0",
     "maath": "^0.10.7",
     "morgan": "^1.10.0",

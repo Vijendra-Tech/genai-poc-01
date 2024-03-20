@@ -2,6 +2,7 @@ import { useFormAction, useNavigation } from '@remix-run/react'
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import translate from 'translate'
+import LT from 'lottie-react'
 // import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 // //@ts-ignore
 // import * as parse from "pdf-parse";
@@ -56,7 +57,7 @@ export function invariantResponse(
 			typeof message === 'function'
 				? message()
 				: message ||
-				  'An invariant failed, please provide a message to explain why.',
+				'An invariant failed, please provide a message to explain why.',
 			{ status: 400, ...responseInit },
 		)
 	}
@@ -83,56 +84,56 @@ export function useIsSubmitting({
 }
 
 export function assertNonNull<PossibleNullType>(
-  possibleNull: PossibleNullType,
-  errorMessage: string
+	possibleNull: PossibleNullType,
+	errorMessage: string
 ): asserts possibleNull is Exclude<PossibleNullType, null | undefined> {
-  if (possibleNull == null) throw new Error(errorMessage);
+	if (possibleNull == null) throw new Error(errorMessage);
 }
 
 export function getDomainUrl(request: Request) {
-  const host =
-    request.headers.get("X-Forwarded-Host") ?? request.headers.get("host");
-  if (!host) {
-    throw new Error("Could not determine domain URL.");
-  }
-  const protocol = host.includes("localhost") ? "http" : "https";
-  return `${protocol}://${host}`;
+	const host =
+		request.headers.get("X-Forwarded-Host") ?? request.headers.get("host");
+	if (!host) {
+		throw new Error("Could not determine domain URL.");
+	}
+	const protocol = host.includes("localhost") ? "http" : "https";
+	return `${protocol}://${host}`;
 }
 export function getNonNull<
-  Type extends Record<string, null | undefined | unknown>,
+	Type extends Record<string, null | undefined | unknown>,
 >(obj: Type): NonNullProperties<Type> {
-  for (const [key, val] of Object.entries(obj)) {
-    assertNonNull(val, `The value of ${key} is null but it should not be.`);
-  }
-  return obj as NonNullProperties<Type>;
+	for (const [key, val] of Object.entries(obj)) {
+		assertNonNull(val, `The value of ${key} is null but it should not be.`);
+	}
+	return obj as NonNullProperties<Type>;
 }
 
 export function getErrorForLanguage(title: string | null) {
-  if (!title) return `Language is required`;
+	if (!title) return `Language is required`;
 
-  const minLength = 1;
-  const maxLength = 80;
-  if (title.length < minLength) {
-    return `Title must be at least ${minLength} characters`;
-  }
-  if (title.length > maxLength) {
-    return `Title must be no longer than ${maxLength} characters`;
-  }
-  return null;
+	const minLength = 1;
+	const maxLength = 80;
+	if (title.length < minLength) {
+		return `Title must be at least ${minLength} characters`;
+	}
+	if (title.length > maxLength) {
+		return `Title must be no longer than ${maxLength} characters`;
+	}
+	return null;
 }
 
 export function getErrorForAudio(audio: string | null) {
-  if (!audio) return "Audio file is required";
-  return null;
+	if (!audio) return "Audio file is required";
+	return null;
 }
 
-export function combineDocuments(docs:any){
-    return docs.map((doc:any)=>doc.pageContent).join('\n\n')
+export function combineDocuments(docs: any) {
+	return docs.map((doc: any) => doc.pageContent).join('\n\n')
 }
 
-export  function formatConvHistory(messages: string[]) {
+export function formatConvHistory(messages: string[]) {
 	return messages.map((message, i) => {
-		if (i % 2 === 0){
+		if (i % 2 === 0) {
 			return `Human: ${message}`
 		} else {
 			return `AI: ${message}`
@@ -141,9 +142,9 @@ export  function formatConvHistory(messages: string[]) {
 }
 
 
-export async function translateFrom(str:string, language:string) {
+export async function translateFrom(str: string, language: string) {
 	//@ts-ignore
-	translate.engine = 'libre'; 
+	translate.engine = 'libre';
 	const translated_string = await translate(str, language);
 	console.log(translated_string);
 	return translated_string
@@ -156,3 +157,5 @@ export async function translateFrom(str:string, language:string) {
 //     const docs = await loader.load();
 //     return docs
 // }
+
+export const Lottie = LT.default

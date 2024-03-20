@@ -22,6 +22,7 @@ import {
 } from "#app/components/records/record-form.tsx";
 import { ActionFunction, json, redirect } from "@remix-run/node";
 import {
+  Lottie,
   getDomainUrl,
   getErrorForAudio,
   getErrorForLanguage,
@@ -36,6 +37,8 @@ import AiDesc from "#app/components/ai-desc.tsx";
 import path from 'path'
 import TabSection from "#app/components/tabs-section.tsx";
 import { loadgithubFiles } from "#app/utils/code.server.ts";
+import roboData from "#app/animation/bot.json";
+import LT from "lottie-react";
 
 type ActionData = RecordingFormData;
 
@@ -66,15 +69,15 @@ export const action: ActionFunction = async ({ request }) => {
 
     const { audio, language, audioUrl } = getNonNull(formData);
     const apiResponse = await audioTotext(audio, language);
-    if(typeof apiResponse ==='string'){
+    if (typeof apiResponse === 'string') {
       await textSpeech(apiResponse)
     }
     // Usage
     const fileBlob = await readFileAsBlob("");
-   
+
     console.log("----", apiResponse);
 
-    return json({ msg: apiResponse,audio,fileBlob});
+    return json({ msg: apiResponse, audio, fileBlob });
   } catch (error: unknown) {
     actionData.errors.generalError = getErrorMessage(error);
     return json(actionData, 500);
@@ -144,16 +147,14 @@ export default function Index() {
   const [openVoiceCtrl, setOpenVoiceCtrl] = useState<boolean>(false);
   const actionData = useActionData<ActionData>();
   const [openChatWindow, setOpenChatWindow] = useState(false);
+  const Lottie = LT.default;
 
   return (
-    <div className="container w-full flex flex-row gap-0">
-     <AiDesc />
-     <img src="./ai.png" alt="AI" className="w-1/2 h-1/2 mt-80"  height={200} width={200}/>
-      <div className="flex flex-row justify-end">
-        <div className="min-w-[300px]"></div>
-         <div className="ml-96 mt-6"><TabSection codes={[]}/></div>
+    <div className="container">
+      <div className="flex flex-row justify-between items-center">
+        <AiDesc />
+        <Lottie animationData={roboData} loop={true} className="w-[720px] h-[720px]" />
       </div>
-          {(openChatWindow ||(openChatWindow && actionData)) && <ChatWindow setOpenChatWindow={setOpenChatWindow} data={actionData} />}
     </div>
   );
 }
@@ -162,15 +163,15 @@ export function ErrorBoundary() {
   const error = useRouteError();
   return (
     <div>
-        <div className="flex justify-center bg-orange-400 items-center mt-80 w-full">
-          <Angry size={'40px'}/>
-          <H4 as="p">{`Yikes... Something went wrong. Sorry about that.`}</H4>
-          <H4 as="p" variant="secondary" className="mt-10">
-            {`Want to `}
-            <Link to=".">try again?</Link>
-          </H4>
-        </div>
-        
+      <div className="flex justify-center bg-orange-400 items-center mt-80 w-full">
+        <Angry size={'40px'} />
+        <H4 as="p">{`Yikes... Something went wrong. Sorry about that.`}</H4>
+        <H4 as="p" variant="secondary" className="mt-10">
+          {`Want to `}
+          <Link to=".">try again?</Link>
+        </H4>
+      </div>
+
     </div>
   );
 }
