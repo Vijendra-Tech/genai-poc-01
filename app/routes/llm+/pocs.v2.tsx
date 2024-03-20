@@ -64,9 +64,7 @@ export async function action({ request }: ActionFunctionArgs) {
                 const fileBlob = await readFileAsBlob("");
                 return json({ audio, fileBlob });
             }
-            // await textSpeech(apiResponse)
         }
-        // const response = await FaqQA(question?.toString())
     } catch (error) {
         console.log(error);
         return `llm/pocs/v2`
@@ -78,7 +76,7 @@ function BankingPOCVersionTwo() {
     const [audio, setAudio] = React.useState<Blob | null>(null);
     const [showRec, setShowRec] = useState<boolean>(false)
     const [openChatWindow, setOpenChatWindow] = useState(false);
-        const actionData = useActionData<typeof action>()
+    const actionData = useActionData<typeof action>()
     //manage workfloe steps
     const [stages, setStages] = useState<any>({
         one: false,
@@ -130,7 +128,7 @@ function BankingPOCVersionTwo() {
                 openChatWindow ? (
                     <>
                         <div className='bg-white w-1/4 text-black h-[720px] flex justify-center ml-64 rounded-l-3xl fixed top-44'>
-                            <Workflow stages={stages} />
+                            <Workflow stages={stages} data={actionData}/>
                         </div>
                         <ChatSection userInput={actionData?.audio} botOuput={actionData?.fileBlob} stages={stages} >
                             <div className='relative w-full'>

@@ -24,7 +24,7 @@ const ChatSection = ({ userInput, botOuput, children, stages }: chatSectionProps
         <div className="fixed right-10 bottom-10 w-1/4  min-h-[720px] max-h-[720px] bg-white shadow-lg rounded-lg">
             <div className="bg-muted flex justify-start items-center h-14">
                 <img src="../../ai.png" alt="AI" className="w-12 h-12"/>
-                <h1 className="text-2xl font-bold grow">HCBC Bot</h1>
+                <h1 className="text-2xl font-bold grow">HSBC Bot</h1>
                 <MessageSquareX
                     className="float-end cursor-pointer"
                 // onClick={() => setOpenChatWindow(false)}

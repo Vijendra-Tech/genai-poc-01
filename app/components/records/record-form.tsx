@@ -74,9 +74,9 @@ function AudioSubmitForm({
             {data.errors.generalError}
           </p>
         ) : null}
-        {data?.errors?.audio ? (
+        {data?.errors?.language ? (
           <p id="audio-error-message" className="text-red-600 text-center">
-            {data.errors.audio}
+            {data.errors.language}
           </p>
         ) : null}
       </div>

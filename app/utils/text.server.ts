@@ -9,13 +9,8 @@ import { loadpdf } from './rag.server.ts';
 
 export async function textEmbedding() {
     try {
-        // const res = await fetch('dummy.txt')
-        // const text = await res.text()
-    //     const loader = new TextLoader('app/assets/dummy.txt')
-    //    const text = await loader.load();
+      
         const docs = await loadpdf()
-        // console.log('text',docs);
-        
         const splitter = new RecursiveCharacterTextSplitter({
             chunkSize: 500,
             separators: ['\n\n', '\n', ' ', '', '##'],

@@ -108,7 +108,7 @@ export function getNonNull<
 }
 
 export function getErrorForLanguage(title: string | null) {
-  if (!title) return `Title is required`;
+  if (!title) return `Language is required`;
 
   const minLength = 1;
   const maxLength = 80;
